@@ -4,7 +4,7 @@ import java.util.*;
 
 public class CSVParser {
     private Map<String, Double> _wordMap;
-    private Double _wordNumber = 0.0;
+    private double _wordNumber = 0.0;
 
     public CSVParser() {
         _wordMap = new HashMap<>();
@@ -37,7 +37,7 @@ public class CSVParser {
     }
 
     private void _safeIncrement(String key) {
-        Double oldValue;
+        double oldValue;
         oldValue = _wordMap.getOrDefault(key, 0.0);
         _wordMap.put(key, oldValue + 1);
     }
