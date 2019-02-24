@@ -7,7 +7,9 @@ public class WriteBlock implements BlockInterface {
             throw new Exception("Invalid number of arguments");
 
         FileWriter fileWriter = new FileWriter(input[0], false);
-
+        fileWriter.write(input[1]);
+        fileWriter.flush();
+        fileWriter.close();
 
         return null;
     }

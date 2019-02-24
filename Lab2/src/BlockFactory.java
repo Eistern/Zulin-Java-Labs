@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-class PropertiesParser {
-    Map<String, Class> parseFile(String fileName) throws Exception {
-        Map<String, Class> output = new HashMap<>();
+class BlockFactory {
+    private Map<String, Class<BlockInterface>> _classMap;
+
+    BlockFactory(String fileName) throws Exception {
+        _classMap = new HashMap<>();
         Properties properties = new Properties();
         InputStream fin = new FileInputStream(fileName);
 
@@ -14,13 +16,15 @@ class PropertiesParser {
         properties.forEach((action, className) -> {
             try {
                 Class classQual = Class.forName(className.toString());
-                output.put(action.toString(), classQual);
+                _classMap.put(action.toString(), classQual);
             }
             catch (Exception e) {
                 e.printStackTrace();
             }
         });
+    }
 
-        return output;
+    BlockInterface getBlock(String blockName) throws Exception{
+        return _classMap.get(blockName).getDeclaredConstructor().newInstance();
     }
 }
