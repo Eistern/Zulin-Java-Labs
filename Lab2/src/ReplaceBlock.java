@@ -1,6 +1,8 @@
 public class ReplaceBlock implements BlockInterface {
     @Override
-    public String[] run(String[] input) {
+    public String[] run(String[] input) throws Exception {
+        if (input == null || input.length != 3)
+            throw new Exception("Invalid number of arguments");
         return null;
     }
     //Input - Text, Output - Text
