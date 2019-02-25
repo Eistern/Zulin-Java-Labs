@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 
 public class ReadBlock implements BlockInterface {
     @Override
-    public String[] run(String[] input) throws Exception {
+    public String run(String[] input) throws Exception {
         if (input == null || (input.length == 2 && input[1] != null) || input.length != 1)
             throw new Exception("Invalid number of arguments");
 
@@ -14,7 +14,7 @@ public class ReadBlock implements BlockInterface {
         while ((inputInt = inputStreamReader.read()) != -1) {
             stringBuilder.append((char) inputInt);
         }
-        return new String[]{stringBuilder.toString()};
+        return stringBuilder.toString();
     }
     //Input - None, Output - Text
     //1 necessary arg

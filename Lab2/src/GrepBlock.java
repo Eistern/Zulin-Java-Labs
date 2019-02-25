@@ -1,6 +1,6 @@
 public class GrepBlock implements BlockInterface {
     @Override
-    public String[] run(String[] input) {
+    public String run(String[] input) {
         String[] buffArray = input[1].split("\n");
         StringBuilder result = new StringBuilder();
 
@@ -11,7 +11,7 @@ public class GrepBlock implements BlockInterface {
             }
         }
 
-        return new String[]{result.toString()};
+        return result.toString();
     }
     //Input - Text, Output - Text
     //1 necessary arg and text

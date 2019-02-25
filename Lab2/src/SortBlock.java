@@ -2,7 +2,7 @@ import java.util.Arrays;
 
 public class SortBlock implements BlockInterface {
     @Override
-    public String[] run(String[] input) {
+    public String run(String[] input) {
         String[] buffArray = input[0].split("\n");
         Arrays.sort(buffArray);
         StringBuilder result = new StringBuilder();
@@ -12,7 +12,7 @@ public class SortBlock implements BlockInterface {
             result.append('\n');
         }
 
-        return new String[]{result.toString()};
+        return result.toString();
     }
     //Input - Text, Output - Text
     //0 necessary args and text

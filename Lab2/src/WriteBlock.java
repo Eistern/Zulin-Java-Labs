@@ -2,7 +2,7 @@ import java.io.FileWriter;
 
 public class WriteBlock implements BlockInterface {
     @Override
-    public String[] run(String[] input) throws Exception {
+    public String run(String[] input) throws Exception {
         if (input == null || input.length != 3)
             throw new Exception("Invalid number of arguments");
 
