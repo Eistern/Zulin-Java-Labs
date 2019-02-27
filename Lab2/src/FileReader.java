@@ -21,10 +21,12 @@ public class FileReader {
             if (inputInt == -1)
                 _eofFlag = true;
 
-            if ((char) inputInt != '\n')
+            if ((char) inputInt != '\n' && (char) inputInt != '\r')
                 _stringBuilder.append((char) inputInt);
             else if (_stringBuilder.toString().length() != 0)
                 return _stringBuilder.toString().toLowerCase();
+            else
+                _stringBuilder.delete(0, 1);
         }
         return "";
     }

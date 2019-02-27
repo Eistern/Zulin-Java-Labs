@@ -1,0 +1,5 @@
+desc
+1 = read src\\test.txt
+2 = write src\\out.txt
+csed
+1 -> 2

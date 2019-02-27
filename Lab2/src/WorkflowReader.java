@@ -60,7 +60,7 @@ public class WorkflowReader {
         else
             throw new Exception("File ended");
 
-        String[] parsedID = convDesc.split("->");
+        String[] parsedID = convDesc.split(" -> ");
         for (String s : parsedID)
             result.add(Integer.parseInt(s));
 
