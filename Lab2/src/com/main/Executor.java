@@ -32,7 +32,8 @@ class Executor {
                 currentBlockArgs[currentBlockArgs.length - 1] = buffResult;
 
                 BlockInterface currentBlock = factory.getBlock(currentBlockName);
-                buffResult = currentBlock.run(currentBlockArgs);
+                if (currentBlock != null)
+                    buffResult = currentBlock.run(currentBlockArgs);
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error occurred: ", e.fillInStackTrace());

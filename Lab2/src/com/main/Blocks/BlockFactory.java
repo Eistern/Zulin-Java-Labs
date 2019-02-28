@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class BlockFactory {
     private static final Logger logger = Logger.getLogger(BlockFactory.class.getName());
@@ -27,11 +28,16 @@ public class BlockFactory {
                 }
             });
         } catch (Exception e) {
-            logger.se
+            logger.log(Level.SEVERE, "Error occurred: ", e.fillInStackTrace());
         }
     }
 
-    public BlockInterface getBlock(String blockName) throws Exception{
-        return _classMap.get(blockName).getDeclaredConstructor().newInstance();
+    public BlockInterface getBlock(String blockName) {
+        try {
+            return _classMap.get(blockName).getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error occurred: ", e.fillInStackTrace());
+        }
+        return null;
     }
 }
