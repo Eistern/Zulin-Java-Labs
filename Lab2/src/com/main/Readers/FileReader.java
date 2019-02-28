@@ -33,22 +33,6 @@ public class FileReader {
         return "";
     }
 
-    public String nextWord() throws IOException {
-        _stringBuilder.delete(0, _stringBuilder.toString().length());
-        int inputInt;
-        while (this.hasNext()) {
-            inputInt = _inputStreamReader.read();
-            if (inputInt == -1)
-                _eofFlag = true;
-
-            if (Character.isLetterOrDigit(inputInt))
-                _stringBuilder.append((char) inputInt);
-            else if (_stringBuilder.toString().length() != 0)
-                return _stringBuilder.toString().toLowerCase();
-        }
-        return "";
-    }
-
     public boolean hasNext() {
         return !_eofFlag;
     }

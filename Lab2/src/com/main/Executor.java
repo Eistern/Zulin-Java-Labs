@@ -18,7 +18,7 @@ class Executor {
     void processFile(String workflowFile) {
         try {
             WorkflowReader workfolwReader = new WorkflowReader(workflowFile);
-            BlockFactory factory = new BlockFactory("src\\com\\main\\blocks.properties");
+            BlockFactory factory = BlockFactory.getInstance();
             String buffResult = null;
             logger.fine("Initialization successful");
 
