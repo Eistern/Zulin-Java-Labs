@@ -1,3 +1,5 @@
+package com.main.Blocks;
+
 public class ReplaceBlock implements BlockInterface {
     @Override
     public String run(String[] input) throws Exception {

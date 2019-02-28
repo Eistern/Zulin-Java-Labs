@@ -1,3 +1,5 @@
+package com.main.Blocks;
+
 public class GrepBlock implements BlockInterface {
     @Override
     public String run(String[] input) throws Exception {

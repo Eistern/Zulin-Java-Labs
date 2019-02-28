@@ -1,3 +1,8 @@
+package com.main;
+
+import com.main.Blocks.BlockFactory;
+import com.main.Blocks.BlockInterface;
+
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -13,7 +18,7 @@ class Executor {
     void processFile(String workflowFile) {
         try {
             WorkflowReader workfolwReader = new WorkflowReader(workflowFile);
-            BlockFactory factory = new BlockFactory("src\\blocks.properties");
+            BlockFactory factory = new BlockFactory("src\\com\\main\\blocks.properties");
             String buffResult = null;
             logger.fine("Initialization successful");
 
@@ -30,7 +35,7 @@ class Executor {
                 buffResult = currentBlock.run(currentBlockArgs);
             }
         } catch (Exception e) {
-            logger.log(Level.WARNING, "Error occurred: ");
+            logger.log(Level.SEVERE, "Error occurred: ", e.fillInStackTrace());
         }
     }
 }

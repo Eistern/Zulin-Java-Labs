@@ -1,3 +1,5 @@
+package com.main.Blocks;
+
 import java.io.FileWriter;
 
 public class WriteBlock implements BlockInterface {

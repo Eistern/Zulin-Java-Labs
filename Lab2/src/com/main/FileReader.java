@@ -1,3 +1,5 @@
+package com.main;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,12 +10,12 @@ public class FileReader {
     private StringBuilder _stringBuilder;
     private boolean _eofFlag = false;
 
-    public FileReader(String fileName) throws FileNotFoundException {
+    FileReader(String fileName) throws FileNotFoundException {
         this._inputStreamReader = new InputStreamReader(new FileInputStream(fileName));
         this._stringBuilder = new StringBuilder();
     }
 
-    public String nextString() throws IOException {
+    String nextString() throws IOException {
         _stringBuilder.delete(0, _stringBuilder.toString().length());
         int inputInt;
         while (this.hasNext()) {
@@ -47,7 +49,7 @@ public class FileReader {
         return "";
     }
 
-    public boolean hasNext() {
+    boolean hasNext() {
         return !_eofFlag;
     }
 

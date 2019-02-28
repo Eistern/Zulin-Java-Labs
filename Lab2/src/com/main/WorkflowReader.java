@@ -1,3 +1,5 @@
+package com.main;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,22 +14,22 @@ class Block {
         this.cmd = cmd;
     }
 
-    public String getCmdName() {
+    String getCmdName() {
         return cmd;
     }
 
-    public String[] getArgs() {
+    String[] getArgs() {
         return args;
     }
 }
 
-public class WorkflowReader {
+class WorkflowReader {
     private FileReader fin;
     WorkflowReader(String fileName) throws Exception {
         this.fin = new FileReader(fileName);
     }
 
-    public Map<Integer, Block> readBlockDecl() throws Exception {
+    Map<Integer, Block> readBlockDecl() throws Exception {
         String buffString;
         if (fin.hasNext())
             buffString = fin.nextString();
@@ -51,7 +53,7 @@ public class WorkflowReader {
         return result;
     }
 
-    public List<Integer> readBlockConv() throws Exception {
+    List<Integer> readBlockConv() throws Exception {
         List<Integer> result = new LinkedList<>();
         String convDesc;
 
