@@ -7,9 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-class Block {
-    private String cmd;
-    private String[] args;
+final class Block {
+    private final String cmd;
+    private final String[] args;
 
     Block(String cmd, String[] args) {
         this.args = args;

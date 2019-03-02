@@ -15,7 +15,7 @@ class Executor {
         logger.fine("Workflow executor created");
     }
 
-    void processFile(String workflowFile) {
+    void processFile(@SuppressWarnings("SameParameterValue") String workflowFile) {
         try {
             WorkflowReader workfolwReader = new WorkflowReader(workflowFile);
             BlockFactory factory = BlockFactory.getInstance();

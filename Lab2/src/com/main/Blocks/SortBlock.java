@@ -24,6 +24,7 @@ public class SortBlock implements BlockInterface {
                 result.append(s);
                 result.append('\n');
             }
+            result.deleteCharAt(result.toString().length() - 1);
 
             return result.toString();
         } catch (Exception e) {

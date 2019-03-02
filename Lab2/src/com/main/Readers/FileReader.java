@@ -23,7 +23,7 @@ public class FileReader {
             if (inputInt == -1)
                 _eofFlag = true;
 
-            if ((char) inputInt != '\n' && (char) inputInt != '\r')
+            if ((char) inputInt != '\n' && (char) inputInt != '\r' && inputInt != -1)
                 _stringBuilder.append((char) inputInt);
             else if (_stringBuilder.toString().length() != 0)
                 return _stringBuilder.toString().toLowerCase();
@@ -35,9 +35,5 @@ public class FileReader {
 
     public boolean hasNext() {
         return !_eofFlag;
-    }
-
-    public void closeReader() throws IOException {
-        _inputStreamReader.close();
     }
 }

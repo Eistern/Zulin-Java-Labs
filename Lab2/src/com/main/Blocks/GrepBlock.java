@@ -24,6 +24,9 @@ public class GrepBlock implements BlockInterface {
                     result.append('\n');
                 }
             }
+            if (!result.toString().isEmpty())
+                result.deleteCharAt(result.toString().length() - 1);
+
             return result.toString();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error occurred: ", e.fillInStackTrace());
