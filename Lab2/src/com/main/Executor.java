@@ -3,15 +3,24 @@ package com.main;
 import com.main.Blocks.BlockFactory;
 import com.main.Blocks.BlockInterface;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 class Executor {
-    private static final Logger logger = Logger.getLogger(Executor.class.getName());
+    private final Logger logger;
 
-    Executor(){
+    Executor() {
+        try {
+            LogManager.getLogManager().readConfiguration(
+                    Main.class.getResourceAsStream("/logging.properties"));
+        } catch (IOException e) {
+            System.err.println("Could not setup logger configuration: " + e.toString());
+        }
+        logger = Logger.getLogger(Executor.class.getName());
         logger.fine("Workflow executor created");
     }
 
