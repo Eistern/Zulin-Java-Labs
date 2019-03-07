@@ -8,7 +8,7 @@ class ReplaceBlockTest {
     @Test
     void run() {
         BlockInterface testBlock = new ReplaceBlock();
-        String result = testBlock.run(new String[]{"test", "result", "test"});
+        String result = testBlock.run(new String[]{"test", "result", "test"}, "test");
         Assertions.assertEquals(result, "result");
     }
 }

@@ -7,15 +7,15 @@ public class GrepBlock implements BlockInterface {
     private static final Logger logger = Logger.getLogger(GrepBlock.class.getName());
 
     @Override
-    public String run(String[] input) {
+    public String run(String[] input, String text) {
         try {
-            if (input == null || input.length != 2)
+            if (input == null || input.length != 1)
                 throw new Exception("Invalid number of arguments");
 
-            if (input[1] == null)
+            if (text == null)
                 throw new Exception("No text given at grep block");
 
-            String[] buffArray = input[1].split("\n");
+            String[] buffArray = text.split("\n");
             StringBuilder result = new StringBuilder();
 
             for (String s : buffArray) {

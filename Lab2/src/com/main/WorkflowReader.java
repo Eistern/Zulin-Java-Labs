@@ -45,9 +45,9 @@ class WorkflowReader {
         Map<Integer, Block> result = new HashMap<>();
         while (fin.hasNext() && !buffString.equals("csed")) {
             String[] formatArray = buffString.split(" ");
-            String[] argsArray = new String[formatArray.length - 2];
+            String[] argsArray = new String[formatArray.length - 3];
             System.arraycopy(formatArray, 3, argsArray, 0, formatArray.length - 3);
-            argsArray[argsArray.length - 1] = null;
+
             result.put(Integer.parseInt(formatArray[0]), new Block(formatArray[2], argsArray));
 
             buffString = fin.nextString();

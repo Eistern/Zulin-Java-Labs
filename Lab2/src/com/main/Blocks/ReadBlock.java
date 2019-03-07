@@ -9,9 +9,9 @@ public class ReadBlock implements BlockInterface {
     private static final Logger logger = Logger.getLogger(ReadBlock.class.getName());
 
     @Override
-    public String run(String[] input) {
+    public String run(String[] input, String text) {
         try {
-            if (input == null || input.length != 2)
+            if (input == null || input.length != 1)
                 throw new Exception("Invalid number of arguments");
 
             InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(input[0]));

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="65544bf5-3f9f-4be4-8045-0436deeddd22" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/BlockInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/BlockInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/GrepBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/GrepBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/ReadBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/ReadBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/ReplaceBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/ReplaceBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/SortBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/SortBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/WriteBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/WriteBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/out.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/out.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/Blocks/test.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/Executor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/Executor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/WorkflowReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/WorkflowReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/src/com/main/workflow.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/src/com/main/workflow.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/tests/com/main/Blocks/GrepBlockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/tests/com/main/Blocks/GrepBlockTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/tests/com/main/Blocks/ReadBlockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/tests/com/main/Blocks/ReadBlockTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/tests/com/main/Blocks/ReplaceBlockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/tests/com/main/Blocks/ReplaceBlockTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/tests/com/main/Blocks/SortBlockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/tests/com/main/Blocks/SortBlockTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab2/tests/com/main/Blocks/WriteBlockTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2/tests/com/main/Blocks/WriteBlockTest.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="164630356">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="260" />
+    <option name="y" value="20" />
+    <option name="width" value="1400" />
+    <option name="height" value="996" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="65544bf5-3f9f-4be4-8045-0436deeddd22" name="Default Changelist" comment="" />
+      <created>1551926803805</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1551926803805</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1052" extended-state="6" />
+    <layout>
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+</project>

@@ -1,5 +1,5 @@
 package com.main.Blocks;
 
 public interface BlockInterface {
-    String run(String[] input);
+    String run(String[] args, String text);
 }

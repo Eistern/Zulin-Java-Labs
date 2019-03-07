@@ -9,7 +9,7 @@ class SortBlockTest {
     @Test
     void run() {
         BlockInterface testBlock = new SortBlock();
-        String result = testBlock.run(new String[]{"B\nA\nC"});
+        String result = testBlock.run(new String[]{null}, "B\nA\nC");
         Assertions.assertEquals(result, "A\nB\nC");
     }
 }

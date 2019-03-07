@@ -8,7 +8,7 @@ class ReadBlockTest {
     @Test
     void run() {
         BlockInterface testBlock = new ReadBlock();
-        String result = testBlock.run(new String[]{"src\\com\\main\\Blocks\\test.txt", null});
+        String result = testBlock.run(new String[]{"src\\com\\main\\Blocks\\test.txt"}, null);
         Assertions.assertEquals(result, "testtest1");
     }
 }

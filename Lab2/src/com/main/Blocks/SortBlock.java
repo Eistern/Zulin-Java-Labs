@@ -8,15 +8,15 @@ public class SortBlock implements BlockInterface {
     private static final Logger logger = Logger.getLogger(SortBlock.class.getName());
 
     @Override
-    public String run(String[] input) {
+    public String run(String[] input, String text) {
         try {
-            if (input == null || input.length != 1)
+            if (input == null || input.length != 0)
                 throw new Exception("Invalid number of arguments");
 
-            if (input[0] == null)
+            if (text == null)
                 throw new Exception("No text given at sort block");
 
-            String[] buffArray = input[0].split("\n");
+            String[] buffArray = text.split("\n");
             Arrays.sort(buffArray);
             StringBuilder result = new StringBuilder();
 

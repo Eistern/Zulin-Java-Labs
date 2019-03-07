@@ -8,7 +8,7 @@ class GrepBlockTest {
     @Test
     void run() {
         BlockInterface testBlock = new GrepBlock();
-        String result = testBlock.run(new String[]{"A", "A\nB\nAbbb\nC"});
+        String result = testBlock.run(new String[]{"A"}, "A\nB\nAbbb\nC");
         Assertions.assertEquals(result, "A\nAbbb");
     }
 }
