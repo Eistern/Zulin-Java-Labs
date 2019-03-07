@@ -45,7 +45,10 @@ public class BlockFactory {
 
     public BlockInterface getBlock(String blockName) {
         try {
-            return _classMap.get(blockName).getDeclaredConstructor().newInstance();
+            Class<BlockInterface> currentConstructor =  _classMap.get(blockName);
+            if (currentConstructor == null)
+                throw new ClassNotFoundException();
+            return currentConstructor.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error occurred: ", e.fillInStackTrace());
         }

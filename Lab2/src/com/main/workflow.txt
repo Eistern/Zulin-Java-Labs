@@ -1,6 +1,6 @@
 desc
-1 = read src\com\main\Blocks\test.txt
+1 = readfff src\com\main\Blocks\test.txt
 4 = sort
 2 = writeghh
 csed
-1 -> 2
+1 -> 4 -> 2
