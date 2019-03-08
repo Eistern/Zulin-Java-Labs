@@ -22,6 +22,12 @@ public class Game {
         view.updateField(gameModel.getPlayerField());
 
         while (true) {
+            while (!control.hasTurn())
+                try {
+                    wait(1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             PlayersTurn currTurn = control.getTurn(gameModel::correctCoord);
             switch (currTurn.getType()) {
                 case MARK:

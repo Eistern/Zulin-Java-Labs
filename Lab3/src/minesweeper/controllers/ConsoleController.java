@@ -54,4 +54,10 @@ public class ConsoleController implements ControllerInterface {
 
         return new PlayersTurn(resultX, resultY, resultType);
     }
+
+    @Override
+    public boolean hasTurn() {
+        return cin.hasNext();
+    }
+
 }
