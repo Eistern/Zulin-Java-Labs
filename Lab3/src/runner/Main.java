@@ -1,14 +1,15 @@
 package runner;
-import gui.MainFrame;
-import minesweeper.Field;
 
-import javax.swing.*;
+import minesweeper.Game;
+import minesweeper.controllers.ConsoleController;
+import minesweeper.view.ConsoleView;
 
 public class Main {
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater( () -> {
-                    MainFrame frame = new MainFrame();
-                }
-        );    }
+        ConsoleController controller = new ConsoleController();
+        ConsoleView view = new ConsoleView();
+        Game minesweeper = new Game(controller, view);
+        minesweeper.run();
+    }
 }

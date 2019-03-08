@@ -15,10 +15,9 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         super("Minesweeper");
-        setSize(640, 480);
+        super.setSize(640, 480);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        pack();
         setVisible(true);
     }
 }
