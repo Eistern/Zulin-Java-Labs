@@ -22,12 +22,14 @@ public class Game {
         view.updateField(gameModel.getPlayerField());
 
         while (true) {
-            while (!control.hasTurn())
-                try {
-                    wait(1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            synchronized (this) {
+                while (!control.hasTurn())
+                    try {
+                        wait(1);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+            }
             PlayersTurn currTurn = control.getTurn(gameModel::correctCoord);
             switch (currTurn.getType()) {
                 case MARK:
@@ -43,10 +45,12 @@ public class Game {
             view.updateField(gameModel.getPlayerField());
 
             if (gameModel.isGameOver()){
+                System.out.println("You've lost");
                 view.sendLoseMessage();
                 break;
             }
             if (gameModel.checkAnswers()) {
+                System.out.println("You've won");
                 view.sendWinMessage();
                 break;
             }

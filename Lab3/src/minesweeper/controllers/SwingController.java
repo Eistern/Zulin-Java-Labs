@@ -1,18 +1,20 @@
 package minesweeper.controllers;
 
+import gui.ButtonControllerFactoryInterface;
 import minesweeper.GameSettings;
 import minesweeper.PlayersTurn;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.function.BiPredicate;
 
-public class SwingController implements ControllerInterface, Observer {
+public class SwingController implements ControllerInterface, Observer, ButtonControllerFactoryInterface {
     private GameSettings bufferedSettings;
     private PlayersTurn bufferedTurn;
-    private boolean hasChanged = false;
+    private boolean hasChanged = true;
 
     class ButtonController extends Observable implements MouseListener {
         private int x, y;
@@ -68,7 +70,7 @@ public class SwingController implements ControllerInterface, Observer {
     @Override
     public GameSettings getSettings() {
         hasChanged = false;
-        return null;
+        return new GameSettings(2, 10);
     }
 
     @Override
@@ -84,12 +86,10 @@ public class SwingController implements ControllerInterface, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("Message get");
-
         if (o instanceof ButtonController) {
-            System.out.println("Turn get");
             bufferedTurn = (PlayersTurn) arg;
         }
+
         hasChanged = true;
     }
 }

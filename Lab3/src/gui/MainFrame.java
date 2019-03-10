@@ -1,18 +1,12 @@
 package gui;
 
-import minesweeper.controllers.SwingController;
-import minesweeper.view.SwingView;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
     private JButton[][] buttonField;
 
-    private void initComponents(Container pane, int size) {
-        SwingController controller = new SwingController();
-        SwingView view = new SwingView(size);
-
+    private void initComponents(Container pane, int size, ButtonFactoryInterface view, ButtonControllerFactoryInterface controller) {
         GridLayout gridLayout = new GridLayout(size, size);
         JPanel test = new JPanel();
         test.setLayout(gridLayout);
@@ -28,16 +22,14 @@ public class MainFrame extends JFrame {
         pane.add(test, BorderLayout.CENTER);
     }
 
-    public MainFrame(int size) {
+    public MainFrame(int size, ButtonFactoryInterface view, ButtonControllerFactoryInterface controller) {
         super("Minesweeper");
         buttonField = new JButton[size][size];
 
-
         super.setSize(640, 480);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initComponents(getContentPane(), size);
+        initComponents(getContentPane(), size, view, controller);
 
         setResizable(false);
-        setVisible(true);
     }
 }
