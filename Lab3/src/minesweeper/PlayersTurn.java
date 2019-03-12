@@ -5,9 +5,9 @@ public class PlayersTurn {
         MARK, OPEN
     }
 
-    private int x;
-    private int y;
-    private TurnTypes type;
+    private final int x;
+    private final int y;
+    private final TurnTypes type;
 
     int getX() {
         return x;

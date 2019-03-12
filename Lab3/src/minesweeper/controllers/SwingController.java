@@ -6,7 +6,6 @@ import minesweeper.GameSettings;
 import minesweeper.PlayersTurn;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,6 +13,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.function.BiPredicate;
 
+@SuppressWarnings("deprecation")
 public class SwingController implements ControllerInterface, Observer, ButtonControllerFactoryInterface, SettingsFrameListenerInterface {
     private GameSettings bufferedSettings;
     private PlayersTurn bufferedTurn;
@@ -21,24 +21,21 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
 
     @Override
     public ActionListener getListener(JSpinner sizeSpinner, JSpinner minesSpinner) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int size = (int) sizeSpinner.getValue();
-                int mines = (int) minesSpinner.getValue();
-                bufferedSettings = new GameSettings(mines, size);
-                hasChanged = true;
-            }
+        return e -> {
+            int size = (int) sizeSpinner.getValue();
+            int mines = (int) minesSpinner.getValue();
+            bufferedSettings = new GameSettings(mines, size);
+            hasChanged = true;
         };
     }
 
     class FiledTilesController extends Observable implements MouseListener {
-        private int x, y;
+        private final int x, y;
 
         FiledTilesController(int x, int y) {
             this.x = x;
             this.y = y;
-            addObserver(SwingController.this::update);
+            addObserver(SwingController.this);
         }
 
         @Override
@@ -90,7 +87,7 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
     }
 
     @Override
-    public PlayersTurn getTurn(BiPredicate<Integer, Integer> correctCoord) {
+    public PlayersTurn getTurn(BiPredicate<Integer, Integer> correctCord) {
         hasChanged = false;
         return bufferedTurn;
     }

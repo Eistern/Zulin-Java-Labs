@@ -38,7 +38,7 @@ public class Game {
                         e.printStackTrace();
                     }
             }
-            PlayersTurn currTurn = control.getTurn(gameModel::correctCoord);
+            PlayersTurn currTurn = control.getTurn(gameModel::correctCord);
             switch (currTurn.getType()) {
                 case MARK:
                     gameModel.setMarkTurn(currTurn.getX(), currTurn.getY());

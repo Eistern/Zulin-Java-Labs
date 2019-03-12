@@ -8,8 +8,8 @@ public class SwingView implements ViewInterface, ButtonFactoryInterface {
     private JButton[][] fieldTiles;
     private MainFrame gameFrame;
     private SettingsFrame settingsFrame;
-    private ButtonControllerFactoryInterface controllerFactory;
-    private SettingsFrameListenerInterface settingsController;
+    private final ButtonControllerFactoryInterface controllerFactory;
+    private final SettingsFrameListenerInterface settingsController;
 
     public SwingView(ButtonControllerFactoryInterface controllerFactory, SettingsFrameListenerInterface settingsController) {
         this.controllerFactory = controllerFactory;

@@ -9,14 +9,16 @@ final class Field {
         For playerFiled : -1 - marked tile
                           -2 - unknown tile
     */
-    private int[][] realField;
-    private int[][] playerField;
-    private int mineNum;
-    private int size;
+    private final int[][] realField;
+    private final int[][] playerField;
+    private final int mineNum;
+    private final int size;
     private boolean gameOver = false;
 
     Field(int size, int count) {
-        mineNum = 0;
+        int curMines = 0;
+
+        this.mineNum = count;
         this.size = size;
         realField = new int[size][size];
         playerField = new int[size][size];
@@ -24,14 +26,14 @@ final class Field {
             Arrays.fill(line, -2);
         }
 
-        while (mineNum != count) {
+        while (curMines != count) {
             int x = (int) (Math.random() * 100 % size);
             int y = (int) (Math.random() * 100 % size);
 
             if (realField[x][y] != 9) {
                 realField[x][y] = 9;
                 initMine(x, y);
-                mineNum++;
+                curMines++;
             }
         }
     }
@@ -56,12 +58,12 @@ final class Field {
         openTile(x, y);
     }
 
-    boolean correctCoord(int x, int y) {
+    boolean correctCord(int x, int y) {
         return (x < size && x >= 0) && (y < size && y >= 0);
     }
 
     private void openTile(int x, int y) {
-        if (!correctCoord(x, y))
+        if (!correctCord(x, y))
             return;
 
         if (playerField[x][y] != -2)
@@ -81,7 +83,7 @@ final class Field {
     }
 
     void setMarkTurn(int x, int y) {
-        if (!correctCoord(x, y))
+        if (!correctCord(x, y))
             return;
 
         if (playerField[x][y] == -2)

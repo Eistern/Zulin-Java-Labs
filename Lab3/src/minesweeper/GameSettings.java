@@ -1,8 +1,8 @@
 package minesweeper;
 
 public class GameSettings {
-    private int size;
-    private int mines;
+    private final int size;
+    private final int mines;
 
     int getMines() {
         return mines;

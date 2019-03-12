@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.function.BiPredicate;
 
 public class ConsoleController implements ControllerInterface {
-    private Scanner cin;
+    private final Scanner cin;
     public ConsoleController() {
         cin = new Scanner(System.in);
     }
@@ -20,7 +20,7 @@ public class ConsoleController implements ControllerInterface {
     }
 
     @Override
-    public PlayersTurn getTurn(BiPredicate<Integer, Integer> correctCoord) {
+    public PlayersTurn getTurn(BiPredicate<Integer, Integer> correctCord) {
         int resultX = 0, resultY = 0;
         PlayersTurn.TurnTypes resultType = null;
         boolean confirmEntry = false;
@@ -45,7 +45,7 @@ public class ConsoleController implements ControllerInterface {
             in = cin.next();
             resultY = Integer.parseInt(in);
 
-            if (!correctCoord.test(resultX, resultY))
+            if (!correctCord.test(resultX, resultY))
                 confirmEntry = false;
 
             if (!confirmEntry)
