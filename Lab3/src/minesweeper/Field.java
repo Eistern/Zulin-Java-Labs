@@ -105,4 +105,8 @@ final class Field {
     int[][] getPlayerField() {
         return playerField;
     }
+
+    public int getSize() {
+        return size;
+    }
 }

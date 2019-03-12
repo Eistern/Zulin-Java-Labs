@@ -4,7 +4,7 @@ public interface ViewInterface {
     void updateField(int[][] currentField);
     void startSettingsStage();
     void endSettingsStage();
-    void startGameStage();
+    void startGameStage(int size);
     void endGameStage();
     void sendWinMessage();
     void sendLoseMessage();

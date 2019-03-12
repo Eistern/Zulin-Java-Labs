@@ -7,6 +7,6 @@ import java.util.function.BiPredicate;
 
 public interface ControllerInterface {
     GameSettings getSettings();
-    PlayersTurn getTurn(BiPredicate<Integer, Integer> correct);
+    PlayersTurn getTurn(BiPredicate<Integer, Integer> correctCoord);
     boolean hasTurn();
 }

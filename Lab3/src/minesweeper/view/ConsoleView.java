@@ -23,7 +23,7 @@ public class ConsoleView implements ViewInterface {
     }
 
     @Override
-    public void startGameStage() {
+    public void startGameStage(int size) {
         System.out.println("--GAME STARTS--");
     }
 

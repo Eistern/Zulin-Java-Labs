@@ -20,7 +20,7 @@ public class ConsoleController implements ControllerInterface {
     }
 
     @Override
-    public PlayersTurn getTurn(BiPredicate<Integer, Integer> correct) {
+    public PlayersTurn getTurn(BiPredicate<Integer, Integer> correctCoord) {
         int resultX = 0, resultY = 0;
         PlayersTurn.TurnTypes resultType = null;
         boolean confirmEntry = false;
@@ -45,7 +45,7 @@ public class ConsoleController implements ControllerInterface {
             in = cin.next();
             resultY = Integer.parseInt(in);
 
-            if (!correct.test(resultX, resultY))
+            if (!correctCoord.test(resultX, resultY))
                 confirmEntry = false;
 
             if (!confirmEntry)

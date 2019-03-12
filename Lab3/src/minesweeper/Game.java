@@ -12,13 +12,21 @@ public class Game {
         this.control = control;
         this.view = view;
         view.startSettingsStage();
+        synchronized (this) {
+            while (!control.hasTurn())
+                try {
+                    wait(1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+        }
         GameSettings gameSettings = control.getSettings();
         view.endSettingsStage();
         gameModel = new Field(gameSettings.getSize(), gameSettings.getMines());
     }
 
     public void run() {
-        view.startGameStage();
+        view.startGameStage(gameModel.getSize());
         view.updateField(gameModel.getPlayerField());
 
         while (true) {
@@ -45,12 +53,10 @@ public class Game {
             view.updateField(gameModel.getPlayerField());
 
             if (gameModel.isGameOver()){
-                System.out.println("You've lost");
                 view.sendLoseMessage();
                 break;
             }
             if (gameModel.checkAnswers()) {
-                System.out.println("You've won");
                 view.sendWinMessage();
                 break;
             }

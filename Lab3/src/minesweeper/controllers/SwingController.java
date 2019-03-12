@@ -1,25 +1,41 @@
 package minesweeper.controllers;
 
 import gui.ButtonControllerFactoryInterface;
+import gui.SettingsFrameListenerInterface;
 import minesweeper.GameSettings;
 import minesweeper.PlayersTurn;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.function.BiPredicate;
 
-public class SwingController implements ControllerInterface, Observer, ButtonControllerFactoryInterface {
+public class SwingController implements ControllerInterface, Observer, ButtonControllerFactoryInterface, SettingsFrameListenerInterface {
     private GameSettings bufferedSettings;
     private PlayersTurn bufferedTurn;
-    private boolean hasChanged = true;
+    private boolean hasChanged = false;
 
-    class ButtonController extends Observable implements MouseListener {
+    @Override
+    public ActionListener getListener(JSpinner sizeSpinner, JSpinner minesSpinner) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int size = (int) sizeSpinner.getValue();
+                int mines = (int) minesSpinner.getValue();
+                bufferedSettings = new GameSettings(mines, size);
+                hasChanged = true;
+            }
+        };
+    }
+
+    class FiledTilesController extends Observable implements MouseListener {
         private int x, y;
 
-        ButtonController(int x, int y) {
+        FiledTilesController(int x, int y) {
             this.x = x;
             this.y = y;
             addObserver(SwingController.this::update);
@@ -37,7 +53,7 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
                 setChanged();
                 notifyObservers(new PlayersTurn(x, y, PlayersTurn.TurnTypes.MARK));
             }
-            else {
+            else if (SwingUtilities.isLeftMouseButton(e)) {
                 setChanged();
                 notifyObservers(new PlayersTurn(x, y, PlayersTurn.TurnTypes.OPEN));
             }
@@ -63,18 +79,18 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
         }
     }
 
-    public ButtonController getController(int x, int y) {
-        return new ButtonController(x, y);
+    public FiledTilesController getController(int x, int y) {
+        return new FiledTilesController(x, y);
     }
 
     @Override
     public GameSettings getSettings() {
         hasChanged = false;
-        return new GameSettings(2, 10);
+        return bufferedSettings;
     }
 
     @Override
-    public PlayersTurn getTurn(BiPredicate<Integer, Integer> correct) {
+    public PlayersTurn getTurn(BiPredicate<Integer, Integer> correctCoord) {
         hasChanged = false;
         return bufferedTurn;
     }
@@ -86,7 +102,7 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
 
     @Override
     public void update(Observable o, Object arg) {
-        if (o instanceof ButtonController) {
+        if (o instanceof FiledTilesController) {
             bufferedTurn = (PlayersTurn) arg;
         }
 
