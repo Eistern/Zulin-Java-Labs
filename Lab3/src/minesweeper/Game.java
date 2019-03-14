@@ -25,19 +25,19 @@ public class Game {
         gameModel = new Field(gameSettings.getSize(), gameSettings.getMines());
     }
 
-    public void run() {
+    public void run() throws InterruptedException {
         view.startGameStage(gameModel.getSize());
         view.updateField(gameModel.getPlayerField());
 
         while (true) {
-            synchronized (this) {
+            /*synchronized (this) {
                 while (!control.hasTurn())
                     try {
                         wait(1);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-            }
+            }*/
             PlayersTurn currTurn = control.getTurn(gameModel::correctCord);
             switch (currTurn.getType()) {
                 case MARK:

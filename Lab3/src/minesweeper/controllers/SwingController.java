@@ -19,6 +19,8 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
     private PlayersTurn bufferedTurn;
     private boolean hasChanged = false;
 
+    private Object lockTurn = new Object();
+
     @Override
     public ActionListener getListener(JSpinner sizeSpinner, JSpinner minesSpinner) {
         return e -> {
@@ -87,8 +89,13 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
     }
 
     @Override
-    public PlayersTurn getTurn(BiPredicate<Integer, Integer> correctCord) {
-        hasChanged = false;
+    public PlayersTurn getTurn(BiPredicate<Integer, Integer> correctCord) throws InterruptedException {
+        synchronized (lockTurn) {
+            while(!hasChanged) {
+                lockTurn.wait();
+            }
+            hasChanged = false;
+        }
         return bufferedTurn;
     }
 
@@ -102,7 +109,9 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
         if (o instanceof FiledTilesController) {
             bufferedTurn = (PlayersTurn) arg;
         }
-
-        hasChanged = true;
+        synchronized (lockTurn) {
+            hasChanged = true;
+            lockTurn.notifyAll();
+        }
     }
 }

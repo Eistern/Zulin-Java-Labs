@@ -10,7 +10,10 @@ class Main {
         SwingController testController = new SwingController();
         SwingView testView = new SwingView(testController, testController);
         Game minesweeper = new Game(testController, testView);
-        minesweeper.run();
-
+        try {
+            minesweeper.run();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
