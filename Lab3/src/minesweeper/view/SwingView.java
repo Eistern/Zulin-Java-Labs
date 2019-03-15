@@ -1,8 +1,10 @@
 package minesweeper.view;
 
 import gui.*;
+import imagePack.ImageCash;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class SwingView implements ViewInterface, ButtonFactoryInterface {
     private JButton[][] fieldTiles;
@@ -22,10 +24,10 @@ public class SwingView implements ViewInterface, ButtonFactoryInterface {
     }
 
     @Override
-    public void updateField(int[][] currentField) {
+    public void updateField(int[][] currentField) throws IOException {
         for (int i = 0; i < fieldTiles.length; i++) {
             for (int j = 0; j < fieldTiles.length; j++) {
-                fieldTiles[i][j].setText(Integer.toString(currentField[i][j]));
+                fieldTiles[i][j].setIcon(ImageCash.getInstance().getImage(currentField[i][j]));
             }
         }
     }

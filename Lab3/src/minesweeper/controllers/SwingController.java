@@ -13,13 +13,17 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.function.BiPredicate;
 
+final class Locker {
+    boolean hasChanged = false;
+}
+
 @SuppressWarnings("deprecation")
 public class SwingController implements ControllerInterface, Observer, ButtonControllerFactoryInterface, SettingsFrameListenerInterface {
     private GameSettings bufferedSettings;
     private PlayersTurn bufferedTurn;
-    private boolean hasChanged = false;
 
-    private Object lockTurn = new Object();
+    private final Locker lockSettings = new Locker();
+    private final Locker lockTurn = new Locker();
 
     @Override
     public ActionListener getListener(JSpinner sizeSpinner, JSpinner minesSpinner) {
@@ -27,7 +31,10 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
             int size = (int) sizeSpinner.getValue();
             int mines = (int) minesSpinner.getValue();
             bufferedSettings = new GameSettings(mines, size);
-            hasChanged = true;
+            synchronized (lockSettings) {
+                lockSettings.hasChanged = true;
+                lockSettings.notifyAll();
+            }
         };
     }
 
@@ -83,25 +90,25 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
     }
 
     @Override
-    public GameSettings getSettings() {
-        hasChanged = false;
+    public GameSettings getSettings() throws InterruptedException {
+        synchronized (lockSettings) {
+            while(!lockSettings.hasChanged) {
+                lockSettings.wait();
+            }
+            lockSettings.hasChanged = false;
+        }
         return bufferedSettings;
     }
 
     @Override
     public PlayersTurn getTurn(BiPredicate<Integer, Integer> correctCord) throws InterruptedException {
         synchronized (lockTurn) {
-            while(!hasChanged) {
+            while(!lockTurn.hasChanged) {
                 lockTurn.wait();
             }
-            hasChanged = false;
+            lockTurn.hasChanged = false;
         }
         return bufferedTurn;
-    }
-
-    @Override
-    public boolean hasTurn() {
-        return hasChanged;
     }
 
     @Override
@@ -110,7 +117,7 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
             bufferedTurn = (PlayersTurn) arg;
         }
         synchronized (lockTurn) {
-            hasChanged = true;
+            lockTurn.hasChanged = true;
             lockTurn.notifyAll();
         }
     }

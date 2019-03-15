@@ -3,41 +3,27 @@ package minesweeper;
 import minesweeper.controllers.ControllerInterface;
 import minesweeper.view.ViewInterface;
 
+import java.io.IOException;
+
 public class Game {
     private final ControllerInterface control;
     private final ViewInterface view;
     private final Field gameModel;
 
-    public Game(ControllerInterface control, ViewInterface view) {
+    public Game(ControllerInterface control, ViewInterface view) throws InterruptedException {
         this.control = control;
         this.view = view;
         view.startSettingsStage();
-        synchronized (this) {
-            while (!control.hasTurn())
-                try {
-                    wait(1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-        }
         GameSettings gameSettings = control.getSettings();
         view.endSettingsStage();
         gameModel = new Field(gameSettings.getSize(), gameSettings.getMines());
     }
 
-    public void run() throws InterruptedException {
+    public void run() throws InterruptedException, IOException {
         view.startGameStage(gameModel.getSize());
         view.updateField(gameModel.getPlayerField());
 
         while (true) {
-            /*synchronized (this) {
-                while (!control.hasTurn())
-                    try {
-                        wait(1);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-            }*/
             PlayersTurn currTurn = control.getTurn(gameModel::correctCord);
             switch (currTurn.getType()) {
                 case MARK:
