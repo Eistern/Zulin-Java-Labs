@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame(int size, ButtonFactoryInterface view, ButtonControllerFactoryInterface controller) {
         super("Minesweeper");
-        super.setSize(64 * size, 48 * size);
+        super.setSize(64 * size, 64 * size);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         initComponents(getContentPane(), size, view, controller);
