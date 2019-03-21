@@ -1,6 +1,7 @@
 package clientMain;
 
 import commObjects.MessageForm;
+import commObjects.View.ConsoleMessage;
 
 import java.io.*;
 import java.net.Socket;
@@ -13,7 +14,7 @@ public class Main {
             Socket connectionSocket = new Socket("localhost", 4004);
 
             BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));
-            BufferedWriter cout = new BufferedWriter(new OutputStreamWriter(System.out));
+            ConsoleMessage cout = new ConsoleMessage();
 
             ObjectOutputStream sout = new ObjectOutputStream(connectionSocket.getOutputStream());
             ObjectInputStream sin = new ObjectInputStream(connectionSocket.getInputStream());
@@ -22,18 +23,15 @@ public class Main {
             MessageForm serverResponse;
             while (!connectionSocket.isClosed() && !userInput.equals("stop")) {
                 userInput = cin.readLine();
-                MessageForm userMessage = new MessageForm(MessageForm.MessageType.BROADCAST, userInput, "");
+                MessageForm userMessage = new MessageForm(MessageForm.MessageType.PRIVATE, userInput, "Server", "Client");
 
                 sout.writeObject(userMessage);
                 sout.flush();
-                System.out.println("Message sent");
 
                 serverResponse = (MessageForm) sin.readObject();
-                cout.write(serverResponse.getData() + "\n");
-                cout.flush();
+                cout.showMessage(serverResponse);
             }
             cin.close();
-            cout.close();
             sin.close();
             sout.close();
             connectionSocket.close();

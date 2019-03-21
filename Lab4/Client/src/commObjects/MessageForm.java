@@ -9,26 +9,33 @@ public class MessageForm implements Serializable {
 
     private final MessageType type;
     private final String data;
-    private final String addr;
+    private final String dest;
+    private final String src;
 
     public MessageForm() {
         this.data = "";
-        this.addr = "";
+        this.dest = "";
+        this.src = "";
         this.type = MessageType.BROADCAST;
     }
 
-    public MessageForm(MessageType type, String data, String addr) {
-        this.addr = addr;
+    public MessageForm(MessageType type, String data, String dest, String src) {
+        this.dest = dest;
         this.data = data;
         this.type = type;
+        this.src = src;
     }
 
     public MessageType getType() {
         return type;
     }
 
-    public String getAddr() {
-        return addr;
+    public String getDest() {
+        return dest;
+    }
+
+    public String getSrc() {
+        return src;
     }
 
     public String getData() {
