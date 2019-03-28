@@ -2,7 +2,6 @@ package serverMain;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,7 +11,7 @@ public class serverRun {
     static public void run() throws IOException {
         ServerSocket clientGetter = new ServerSocket(4004);
         while (true) {
-            Socket newClient;
+            Client newClient;
             try {
                 newClient = ConnectionManager.getClient(clientGetter);
                 Thread handler = new Thread(new ClientManager(newClient));
