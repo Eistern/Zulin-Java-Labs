@@ -36,6 +36,12 @@ public class ConsoleController implements ControllerInterface {
                     resultType = PlayersTurn.TurnTypes.OPEN;
                     confirmEntry = true;
                     break;
+                case "RESET":
+                    resultType = PlayersTurn.TurnTypes.RESET;
+                    return new PlayersTurn(resultX, resultY, resultType);
+                case "EXIT":
+                    resultType = PlayersTurn.TurnTypes.EXIT;
+                    return new PlayersTurn(resultX, resultY, resultType);
                 default:
                     confirmEntry = false;
                     break;

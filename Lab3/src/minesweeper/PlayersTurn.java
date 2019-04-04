@@ -2,7 +2,7 @@ package minesweeper;
 
 public class PlayersTurn {
     public enum TurnTypes {
-        MARK, OPEN
+        MARK, OPEN, RESET, EXIT
     }
 
     private final int x;

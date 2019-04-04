@@ -1,7 +1,7 @@
 package minesweeper.controllers;
 
 import gui.ButtonControllerFactoryInterface;
-import gui.SettingsFrameListenerInterface;
+import gui.UtilFrameListenerInterface;
 import minesweeper.GameSettings;
 import minesweeper.PlayersTurn;
 
@@ -18,7 +18,7 @@ final class Locker {
 }
 
 @SuppressWarnings("deprecation")
-public class SwingController implements ControllerInterface, Observer, ButtonControllerFactoryInterface, SettingsFrameListenerInterface {
+public class SwingController implements ControllerInterface, Observer, ButtonControllerFactoryInterface, UtilFrameListenerInterface {
     private GameSettings bufferedSettings;
     private PlayersTurn bufferedTurn;
 
@@ -26,7 +26,7 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
     private final Locker lockTurn = new Locker();
 
     @Override
-    public ActionListener getListener(JSpinner sizeSpinner, JSpinner minesSpinner) {
+    public ActionListener getListenerSettings(JSpinner sizeSpinner, JSpinner minesSpinner) {
         return e -> {
             int size = (int) sizeSpinner.getValue();
             int mines = (int) minesSpinner.getValue();
@@ -34,6 +34,28 @@ public class SwingController implements ControllerInterface, Observer, ButtonCon
             synchronized (lockSettings) {
                 lockSettings.hasChanged = true;
                 lockSettings.notifyAll();
+            }
+        };
+    }
+
+    @Override
+    public ActionListener getListenerExit() {
+        return e -> {
+            bufferedTurn = new PlayersTurn(0, 0, PlayersTurn.TurnTypes.EXIT);
+            synchronized (lockTurn) {
+                lockTurn.hasChanged = true;
+                lockTurn.notifyAll();
+            }
+        };
+    }
+
+    @Override
+    public ActionListener getListenerReset() {
+        return e -> {
+            bufferedTurn = new PlayersTurn(0, 0, PlayersTurn.TurnTypes.RESET);
+            synchronized (lockTurn) {
+                lockTurn.hasChanged = true;
+                lockTurn.notifyAll();
             }
         };
     }

@@ -1,16 +1,21 @@
 package runner;
 
 import minesweeper.Game;
+import minesweeper.controllers.ConsoleController;
 import minesweeper.controllers.SwingController;
+import minesweeper.view.ConsoleView;
 import minesweeper.view.SwingView;
 
 class Main {
 
     public static void main(String[] args) {
-        SwingController testController = new SwingController();
-        SwingView testView = new SwingView(testController, testController);
+        SwingController testSwingController = new SwingController();
+        SwingView testSwingView = new SwingView(testSwingController, testSwingController);
+        ConsoleController testConsoleController = new ConsoleController();
+        ConsoleView testConsoleView = new ConsoleView();
+
         try {
-            Game minesweeper = new Game(testController, testView);
+            Game minesweeper = new Game(testSwingController, testSwingView);
             minesweeper.run();
         } catch (Exception e) {
             e.printStackTrace();

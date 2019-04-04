@@ -14,19 +14,28 @@ final class Field {
     private final int mineNum;
     private final int size;
     private boolean gameOver = false;
+    private boolean resetNeeded = false;
 
     Field(int size, int count) {
-        int curMines = 0;
-
         this.mineNum = count;
         this.size = size;
         realField = new int[size][size];
         playerField = new int[size][size];
+        initFields();
+    }
+
+    private void initFields() {
+        int curMines = 0;
+
         for (int[] line : playerField) {
             Arrays.fill(line, -2);
         }
 
-        while (curMines != count) {
+        for (int[] line : realField) {
+            Arrays.fill(line, 0);
+        }
+
+        while (curMines != mineNum) {
             int x = (int) (Math.random() * 100 % size);
             int y = (int) (Math.random() * 100 % size);
 
@@ -36,6 +45,12 @@ final class Field {
                 curMines++;
             }
         }
+    }
+
+    void resetField() {
+        resetNeeded = false;
+        gameOver = false;
+        initFields();
     }
 
     private void initMine(int x, int y) {
@@ -52,8 +67,13 @@ final class Field {
     }
 
     void setOpenTurn(int x, int y) {
-        if (realField[x][y] == 9)
+        if (resetNeeded)
+            return;
+
+        if (realField[x][y] == 9) {
             gameOver = true;
+            resetNeeded = true;
+        }
 
         openTile(x, y);
     }
@@ -83,7 +103,7 @@ final class Field {
     }
 
     void setMarkTurn(int x, int y) {
-        if (!correctCord(x, y))
+        if (!correctCord(x, y) || resetNeeded)
             return;
 
         if (playerField[x][y] == -2)
@@ -105,10 +125,14 @@ final class Field {
     }
 
     int[][] getPlayerField() {
-        return playerField;
+        return (resetNeeded ? realField : playerField);
     }
 
     public int getSize() {
         return size;
+    }
+
+    public boolean isResetNeeded() {
+        return resetNeeded;
     }
 }

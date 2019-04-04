@@ -11,11 +11,11 @@ public class SwingView implements ViewInterface, ButtonFactoryInterface {
     private MainFrame gameFrame;
     private SettingsFrame settingsFrame;
     private final ButtonControllerFactoryInterface controllerFactory;
-    private final SettingsFrameListenerInterface settingsController;
+    private final UtilFrameListenerInterface utilsController;
 
-    public SwingView(ButtonControllerFactoryInterface controllerFactory, SettingsFrameListenerInterface settingsController) {
+    public SwingView(ButtonControllerFactoryInterface controllerFactory, UtilFrameListenerInterface utilsController) {
         this.controllerFactory = controllerFactory;
-        this.settingsController = settingsController;
+        this.utilsController = utilsController;
     }
 
     public JButton getButton(int x, int y) {
@@ -34,7 +34,7 @@ public class SwingView implements ViewInterface, ButtonFactoryInterface {
 
     @Override
     public void startSettingsStage() {
-        settingsFrame = new SettingsFrame(settingsController);
+        settingsFrame = new SettingsFrame(utilsController);
         settingsFrame.setVisible(true);
     }
 
@@ -47,7 +47,12 @@ public class SwingView implements ViewInterface, ButtonFactoryInterface {
     @Override
     public void startGameStage(int size) {
         fieldTiles = new JButton[size][size];
-        gameFrame = new MainFrame(size, this, controllerFactory);
+        try {
+            gameFrame = new MainFrame(size, this, controllerFactory, utilsController);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
         gameFrame.setVisible(true);
     }
 
@@ -59,11 +64,11 @@ public class SwingView implements ViewInterface, ButtonFactoryInterface {
 
     @Override
     public void sendWinMessage() {
-        JOptionPane.showConfirmDialog(gameFrame, "You've won!", "Results", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showConfirmDialog(gameFrame, "You've won!\nIf you want to continue, select Reset at the Game actions bar", "Results", JOptionPane.DEFAULT_OPTION);
     }
 
     @Override
     public void sendLoseMessage() {
-        JOptionPane.showConfirmDialog(gameFrame, "You've lost", "Results", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showConfirmDialog(gameFrame, "You've lost\nIf you want to continue, select Reset at the Game actions bar", "Results", JOptionPane.DEFAULT_OPTION);
     }
 }

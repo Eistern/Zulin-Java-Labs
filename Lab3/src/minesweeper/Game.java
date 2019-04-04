@@ -32,21 +32,23 @@ public class Game {
                 case OPEN:
                     gameModel.setOpenTurn(currTurn.getX(), currTurn.getY());
                     break;
+                case RESET:
+                    gameModel.resetField();
+                    break;
+                case EXIT:
+                    view.endGameStage();
+                    System.exit(0);
                 default:
                     break;
             }
 
             view.updateField(gameModel.getPlayerField());
 
-            if (gameModel.isGameOver()){
+            if (gameModel.isGameOver())
                 view.sendLoseMessage();
-                break;
-            }
-            if (gameModel.checkAnswers()) {
+
+            if (gameModel.checkAnswers())
                 view.sendWinMessage();
-                break;
-            }
         }
-        view.endGameStage();
     }
 }

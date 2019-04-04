@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SettingsFrame extends JFrame {
-    private Container initComponents(SettingsFrameListenerInterface controller) {
+    private Container initComponents(UtilFrameListenerInterface controller) {
         JPanel panel = new JPanel();
         panel.setLayout(new SpringLayout());
         String[] labels = {"Size of field", "Number of mines"};
@@ -21,7 +21,7 @@ public class SettingsFrame extends JFrame {
         }
 
         JButton setButton = new JButton("Set");
-        setButton.addActionListener(controller.getListener(settingsFields[0], settingsFields[1]));
+        setButton.addActionListener(controller.getListenerSettings(settingsFields[0], settingsFields[1]));
         panel.add(setButton);
         JButton fillerButton = new JButton();
         panel.add(fillerButton);
@@ -37,9 +37,9 @@ public class SettingsFrame extends JFrame {
         return panel;
     }
 
-    public SettingsFrame(SettingsFrameListenerInterface controller) {
+    public SettingsFrame(UtilFrameListenerInterface controller) {
         super("Settings");
-        setSize(320, 120);
+        setSize(320, 140);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(initComponents(controller));
 
