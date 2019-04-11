@@ -1,6 +1,6 @@
 package startPack;
 
-import serverMain.serverRun;
+import serverMain.serverRunner;
 
 import java.io.*;
 import java.util.logging.LogManager;
@@ -14,6 +14,6 @@ public class Main {
         } catch (IOException e) {
             System.err.println("Could not setup logger configuration: " + e.toString());
         }
-        serverRun.run();
+        serverRunner.run();
     }
 }

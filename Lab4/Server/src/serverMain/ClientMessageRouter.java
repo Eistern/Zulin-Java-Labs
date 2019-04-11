@@ -10,11 +10,12 @@ import java.util.logging.Logger;
 
 public class ClientMessageRouter {
     private static final Logger log = Logger.getLogger(ClientMessageRouter.class.getName());
-    private final Map<String, Client> clientMap = new HashMap<>();
+    private final Map<String, ConnectionManager.Client> clientMap = new HashMap<>();
+    private MessageForm sendingMessage;
 
     private static volatile ClientMessageRouter instance;
 
-    public static ClientMessageRouter getInstance() {
+    static ClientMessageRouter getInstance() {
         ClientMessageRouter localInstance = instance;
         if (instance == null)
             synchronized (ClientMessageRouter.class) {
@@ -28,7 +29,7 @@ public class ClientMessageRouter {
 
     private ClientMessageRouter() {}
 
-    public void addClient(String _newClientName, Client _newClient) {
+    void addClient(String _newClientName, ConnectionManager.Client _newClient) {
         clientMap.put(_newClientName, _newClient);
     }
 
@@ -37,15 +38,18 @@ public class ClientMessageRouter {
     }
 
     public void sendMessage(MessageForm message) {
+        sendingMessage = message;
+        if (!clientMap.containsKey(message.getDest()))
+            sendingMessage = new MessageForm(MessageForm.MessageType.PRIVATE, "Client does not exist", message.getSrc(), "Server");
         clientMap.forEach((name, id) -> {
             try {
-                switch (message.getType()) {
+                switch (sendingMessage.getType()) {
                     case BROADCAST:
-                        id.sendMessage(message);
+                        id.sendMessage(sendingMessage);
                         break;
                     case PRIVATE:
-                        if (name.equals(message.getDest()))
-                            id.sendMessage(message);
+                        if (name.equals(sendingMessage.getDest()))
+                            id.sendMessage(sendingMessage);
                         break;
                     default:
                         break;

@@ -8,9 +8,9 @@ import java.util.logging.Logger;
 
 public class ClientManager implements Runnable {
     private static final Logger log = Logger.getLogger(ClientManager.class.getName());
-    private final Client currentClient;
+    private final ConnectionManager.Client currentClient;
 
-    ClientManager(Client currentClient) {
+    ClientManager(ConnectionManager.Client currentClient) {
         this.currentClient = currentClient;
     }
 
@@ -26,10 +26,10 @@ public class ClientManager implements Runnable {
                     continue;
 
                 clientMessage = (MessageForm) clientInput;
-                MessageForm serverResponse = new MessageForm(MessageForm.MessageType.PRIVATE, "Server got: " + clientMessage.getData(), "Client", "Server");
-                currentClient.sendMessage(serverResponse);
-
                 log.fine("Message from " + clientMessage.getSrc() + ": " + clientMessage.getData() + ". From:" + Thread.currentThread().getName());
+
+                if (!clientMessage.getData().equals("stop"))
+                    ClientMessageRouter.getInstance().sendMessage(clientMessage);
             }
             currentClient.disconnectClient();
             log.fine("Client disconnected. From" + Thread.currentThread().getName());

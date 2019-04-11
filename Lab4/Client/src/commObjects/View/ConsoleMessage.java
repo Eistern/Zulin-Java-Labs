@@ -13,4 +13,9 @@ public class ConsoleMessage implements MessageView {
                 System.out.println("[" + src.getSrc() + "]: " + src.getData() + "\n");
         }
     }
+
+    @Override
+    public void showTechnicalMessage(String src) {
+        System.out.println(src);
+    }
 }
