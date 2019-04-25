@@ -39,7 +39,7 @@ public class ClientMessageRouter {
 
     public void sendMessage(MessageForm message) {
         sendingMessage = message;
-        if (!clientMap.containsKey(message.getDest()))
+        if (sendingMessage.getType() != MessageForm.MessageType.BROADCAST && !clientMap.containsKey(message.getDest()))
             sendingMessage = new MessageForm(MessageForm.MessageType.PRIVATE, "Client does not exist", message.getSrc(), "Server");
         clientMap.forEach((name, id) -> {
             try {

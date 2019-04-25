@@ -35,6 +35,11 @@ public class ClientManager implements Runnable {
             log.fine("Client disconnected. From" + Thread.currentThread().getName());
 
         } catch (IOException | ClassNotFoundException e) {
+            try {
+                currentClient.disconnectClient();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
             log.log(Level.SEVERE, "Error while handling client: ", e.fillInStackTrace());
         }
     }

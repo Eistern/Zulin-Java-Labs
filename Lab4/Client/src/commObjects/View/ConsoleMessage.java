@@ -7,10 +7,10 @@ public class ConsoleMessage implements MessageView {
     public void showMessage(MessageForm src) {
         switch (src.getType()) {
             case PRIVATE:
-                System.out.println("[" + src.getSrc() + " -> " + src.getDest() + "]: " + src.getData() + "\n");
+                System.out.print("[" + src.getSrc() + " -> " + src.getDest() + "]: " + src.getData() + "\n");
                 break;
             case BROADCAST:
-                System.out.println("[" + src.getSrc() + "]: " + src.getData() + "\n");
+                System.out.print("[" + src.getSrc() + "]: " + src.getData() + "\n");
         }
     }
 

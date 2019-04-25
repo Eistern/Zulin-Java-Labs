@@ -11,9 +11,9 @@ class ConnectionManager {
     static void connectClient(Socket clientPort) throws IOException, ClassNotFoundException {
         Client currentClient = new Client(clientPort);
         currentClient.sendMessage(new AuthorizationForm());
-        Object respond = currentClient.getMessage();
-        if (respond instanceof AuthorizationForm) {
-            String nickName = ((AuthorizationForm) respond).getNickName();
+        Object response = currentClient.getMessage();
+        if (response instanceof AuthorizationForm) {
+            String nickName = ((AuthorizationForm) response).getNickName();
             currentClient.setClientName(nickName);
         }
         serverRunner.addClient(currentClient);

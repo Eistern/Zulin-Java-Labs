@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class AuthorizationProcessor {
+class AuthorizationProcessor {
     static String authorize(BufferedReader cin, MessageView cout, ObjectOutputStream sout, ObjectInputStream sin) throws IOException, ClassNotFoundException {
         Object probeMessage = sin.readObject();
         if (!(probeMessage instanceof AuthorizationForm))
@@ -17,6 +17,7 @@ public class AuthorizationProcessor {
         String name = cin.readLine();
         sout.writeObject(new AuthorizationForm(name));
         sout.flush();
+        cout.showTechnicalMessage("Name set");
         return name;
     }
 }

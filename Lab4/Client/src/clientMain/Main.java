@@ -5,10 +5,11 @@ import commObjects.View.ConsoleMessage;
 import commObjects.View.MessageView;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class Main {
-
 
     public static void main(String[] args) {
         try {
@@ -22,24 +23,28 @@ public class Main {
 
             String userName = AuthorizationProcessor.authorize(cin, cout, sout, sin);
             String userInput = "";
-            MessageForm serverResponse;
+            MessageWriter writer = new MessageWriter(cout, sin, connectionSocket);
+            Thread writingThread = new Thread(writer);
+
+            writingThread.start();
             while (!connectionSocket.isClosed() && !userInput.equals("stop")) {
                 userInput = cin.readLine();
-                MessageForm userMessage = new MessageForm(MessageForm.MessageType.PRIVATE, userInput, "Server", userName);
+                MessageForm userMessage = InputParser.parseInput(userInput,userName);
                 cout.showMessage(userMessage);
 
                 sout.writeObject(userMessage);
                 sout.flush();
-
-                serverResponse = (MessageForm) sin.readObject();
-                cout.showMessage(serverResponse);
             }
+
             cin.close();
-            sin.close();
-            sout.close();
+            connectionSocket.shutdownInput();
             connectionSocket.close();
 
-        } catch (IOException | ClassNotFoundException e) {
+        }
+        catch (UnknownHostException | ConnectException e) {
+            System.out.println("Host unreachable");
+        }
+        catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
