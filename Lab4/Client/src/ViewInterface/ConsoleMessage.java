@@ -1,6 +1,6 @@
-package commObjects.View;
+package ViewInterface;
 
-import commObjects.MessageForm;
+import commObjects.*;
 
 public class ConsoleMessage implements MessageView {
     @Override

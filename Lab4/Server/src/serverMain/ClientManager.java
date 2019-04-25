@@ -1,6 +1,8 @@
 package serverMain;
 
-import commObjects.MessageForm;
+import Services.ClientMessageRouter;
+import Services.ServerServices;
+import commObjects.BaseForm;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -19,17 +21,10 @@ public class ClientManager implements Runnable {
         try {
             log.fine("Client connected. From: " + Thread.currentThread().getName());
 
-            MessageForm clientMessage = new MessageForm();
-            while (!clientMessage.getData().equals("stop")) {
-                Object clientInput = currentClient.getMessage();
-                if (!(clientInput instanceof MessageForm))
-                    continue;
+            while (ClientMessageRouter.getInstance().clientConnected(currentClient)) {
+                BaseForm clientInput = (BaseForm) currentClient.getMessage();
 
-                clientMessage = (MessageForm) clientInput;
-                log.fine("Message from " + clientMessage.getSrc() + ": " + clientMessage.getData() + ". From:" + Thread.currentThread().getName());
-
-                if (!clientMessage.getData().equals("stop"))
-                    ClientMessageRouter.getInstance().sendMessage(clientMessage);
+                ServerServices.getInstance().getHandler(clientInput.getIdentity()).serve(clientInput, currentClient);
             }
             currentClient.disconnectClient();
             log.fine("Client disconnected. From" + Thread.currentThread().getName());

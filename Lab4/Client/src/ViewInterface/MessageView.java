@@ -1,4 +1,4 @@
-package commObjects.View;
+package ViewInterface;
 
 import commObjects.MessageForm;
 
