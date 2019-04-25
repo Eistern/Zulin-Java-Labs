@@ -1,12 +1,14 @@
 package clientMain;
 
+import ViewInterface.ConsoleMessage;
+import ViewInterface.MessageView;
+import commObjects.BaseForm;
 import commObjects.MessageForm;
-import commObjects.View.ConsoleMessage;
-import commObjects.View.MessageView;
 
 import java.io.*;
 import java.net.ConnectException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 
 public class Main {
@@ -27,10 +29,12 @@ public class Main {
             Thread writingThread = new Thread(writer);
 
             writingThread.start();
-            while (!connectionSocket.isClosed() && !userInput.equals("stop")) {
+            while (!userInput.equals("stop")) {
                 userInput = cin.readLine();
-                MessageForm userMessage = InputParser.parseInput(userInput,userName);
-                cout.showMessage(userMessage);
+                BaseForm userMessage = InputParser.parseInput(userInput, userName);
+
+                if (userMessage.getIdentity().equals("msg"))
+                    cout.showMessage((MessageForm) userMessage);
 
                 sout.writeObject(userMessage);
                 sout.flush();
@@ -43,6 +47,9 @@ public class Main {
         }
         catch (UnknownHostException | ConnectException e) {
             System.out.println("Host unreachable");
+        }
+        catch (SocketException e) {
+            System.out.println("Message hasn't been delivered");
         }
         catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

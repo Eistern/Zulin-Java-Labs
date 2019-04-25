@@ -1,7 +1,7 @@
 package clientMain;
 
+import ViewInterface.MessageView;
 import commObjects.AuthorizationForm;
-import commObjects.View.MessageView;
 
 import java.io.BufferedReader;
 import java.io.IOException;

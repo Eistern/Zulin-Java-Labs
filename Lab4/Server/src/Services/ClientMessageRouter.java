@@ -1,6 +1,7 @@
-package serverMain;
+package Services;
 
 import commObjects.MessageForm;
+import serverMain.ConnectionManager;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class ClientMessageRouter {
 
     private static volatile ClientMessageRouter instance;
 
-    static ClientMessageRouter getInstance() {
+    public static ClientMessageRouter getInstance() {
         ClientMessageRouter localInstance = instance;
         if (instance == null)
             synchronized (ClientMessageRouter.class) {
@@ -29,15 +30,23 @@ public class ClientMessageRouter {
 
     private ClientMessageRouter() {}
 
-    void addClient(String _newClientName, ConnectionManager.Client _newClient) {
+    public void addClient(String _newClientName, ConnectionManager.Client _newClient) {
         clientMap.put(_newClientName, _newClient);
+    }
+
+    String getNickNameList() {
+        return clientMap.keySet().toString();
     }
 
     public void releaseClient(String clientName) {
         clientMap.remove(clientName);
     }
 
-    public void sendMessage(MessageForm message) {
+    public boolean clientConnected(ConnectionManager.Client testClient) {
+        return clientMap.containsValue(testClient);
+    }
+
+    void sendMessage(MessageForm message) {
         sendingMessage = message;
         if (sendingMessage.getType() != MessageForm.MessageType.BROADCAST && !clientMap.containsKey(message.getDest()))
             sendingMessage = new MessageForm(MessageForm.MessageType.PRIVATE, "Client does not exist", message.getSrc(), "Server");
@@ -45,7 +54,8 @@ public class ClientMessageRouter {
             try {
                 switch (sendingMessage.getType()) {
                     case BROADCAST:
-                        id.sendMessage(sendingMessage);
+                        if (!name.equals(sendingMessage.getSrc()))
+                            id.sendMessage(sendingMessage);
                         break;
                     case PRIVATE:
                         if (name.equals(sendingMessage.getDest()))

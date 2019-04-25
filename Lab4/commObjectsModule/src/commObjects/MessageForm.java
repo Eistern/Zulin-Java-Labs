@@ -1,8 +1,6 @@
 package commObjects;
 
-import java.io.Serializable;
-
-public class MessageForm implements Serializable {
+public class MessageForm extends BaseForm {
     public enum MessageType {
         BROADCAST, PRIVATE
     }
@@ -13,6 +11,7 @@ public class MessageForm implements Serializable {
     private final String src;
 
     public MessageForm() {
+        super("e_msg");
         this.data = "";
         this.dest = "";
         this.src = "";
@@ -20,6 +19,7 @@ public class MessageForm implements Serializable {
     }
 
     public MessageForm(MessageType type, String data, String dest, String src) {
+        super("msg");
         this.dest = dest;
         this.data = data;
         this.type = type;

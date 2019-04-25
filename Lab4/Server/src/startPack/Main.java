@@ -1,6 +1,6 @@
 package startPack;
 
-import serverMain.serverRunner;
+import serverMain.*;
 
 import java.io.*;
 import java.util.logging.LogManager;

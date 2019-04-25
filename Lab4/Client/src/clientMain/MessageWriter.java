@@ -1,8 +1,9 @@
 package clientMain;
 
 import commObjects.MessageForm;
-import commObjects.View.MessageView;
+import ViewInterface.MessageView;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
@@ -28,7 +29,7 @@ public class MessageWriter implements Runnable {
                 if (serverResponse != null)
                     view.showMessage(serverResponse);
             }
-            catch (SocketException e) {
+            catch (SocketException | EOFException e) {
                 view.showTechnicalMessage("You've been disconnected");
                 try {
                     connectionSocket.close();
