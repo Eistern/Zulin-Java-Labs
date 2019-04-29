@@ -6,6 +6,8 @@ import commObjects.MessageForm;
 
 class InputParser {
     static BaseForm parseInput(String userInput, String userName) {
+        if (userInput.equals("->time"))
+            return new CommandForm(CommandForm.CommandType.GET_SERVER_TIME);
         if (userInput.equals("->list"))
             return new CommandForm(CommandForm.CommandType.GET_USER_LIST);
 

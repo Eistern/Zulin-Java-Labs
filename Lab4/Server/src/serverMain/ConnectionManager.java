@@ -11,11 +11,17 @@ import java.net.Socket;
 public class ConnectionManager {
     static void connectClient(Socket clientPort) throws IOException, ClassNotFoundException {
         Client currentClient = new Client(clientPort);
+        String nickName = "Server";
         currentClient.sendMessage(new AuthorizationForm());
-        Object response = currentClient.getMessage();
-        if (response instanceof AuthorizationForm) {
-            String nickName = ((AuthorizationForm) response).getNickName();
+
+        while (!ClientMessageRouter.getInstance().correctName(nickName)) {
+            Object response = currentClient.getMessage();
+            nickName = ((AuthorizationForm) response).getNickName();
             currentClient.setClientName(nickName);
+            if (ClientMessageRouter.getInstance().correctName(nickName))
+                currentClient.sendMessage(new AuthorizationForm("", AuthorizationForm.Status.OK));
+            else
+                currentClient.sendMessage(new AuthorizationForm("", AuthorizationForm.Status.REJECT));
         }
         serverRunner.addClient(currentClient);
     }
@@ -34,10 +40,9 @@ public class ConnectionManager {
         }
 
         void setClientName(String clientName) {
-            if (!finalized) {
+            this.clientName = clientName;
+            if (!finalized)
                 finalized = true;
-                this.clientName = clientName;
-            }
         }
 
         String getClientName() {

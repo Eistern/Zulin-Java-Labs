@@ -6,6 +6,7 @@ import serverMain.ConnectionManager;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ public class ClientMessageRouter {
     private static final Logger log = Logger.getLogger(ClientMessageRouter.class.getName());
     private final Map<String, ConnectionManager.Client> clientMap = new HashMap<>();
     private MessageForm sendingMessage;
+    private static final Properties properties = new Properties();
 
     private static volatile ClientMessageRouter instance;
 
@@ -28,10 +30,20 @@ public class ClientMessageRouter {
         return localInstance;
     }
 
-    private ClientMessageRouter() {}
+    private ClientMessageRouter() {
+        try {
+            properties.load(ClientMessageRouter.class.getResourceAsStream("specialNames.properties"));
+        } catch (IOException e) {
+            log.log(Level.CONFIG, "Missing properties file");
+        }
+    }
 
     public void addClient(String _newClientName, ConnectionManager.Client _newClient) {
         clientMap.put(_newClientName, _newClient);
+    }
+
+    public synchronized boolean correctName(String clientName) {
+        return !clientMap.containsKey(clientName) && !properties.containsKey(clientName);
     }
 
     String getNickNameList() {

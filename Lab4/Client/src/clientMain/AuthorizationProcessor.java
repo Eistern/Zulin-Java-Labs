@@ -13,10 +13,17 @@ class AuthorizationProcessor {
         Object probeMessage = sin.readObject();
         if (!(probeMessage instanceof AuthorizationForm))
             System.exit(1);
+        String name = "";
+        AuthorizationForm authorizationForm = (AuthorizationForm) probeMessage;
         cout.showTechnicalMessage("Input your name");
-        String name = cin.readLine();
-        sout.writeObject(new AuthorizationForm(name));
-        sout.flush();
+        while (authorizationForm.getPacketType() != AuthorizationForm.Status.OK) {
+            name = cin.readLine();
+            sout.writeObject(new AuthorizationForm(name, AuthorizationForm.Status.ANSWER));
+            sout.flush();
+            authorizationForm = (AuthorizationForm) sin.readObject();
+            if (authorizationForm.getPacketType() != AuthorizationForm.Status.OK)
+                cout.showTechnicalMessage("Incorrect nickname");
+        }
         cout.showTechnicalMessage("Name set");
         return name;
     }

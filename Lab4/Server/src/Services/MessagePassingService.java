@@ -14,11 +14,21 @@ public class MessagePassingService implements ServiceInterface {
     @Override
     public void serve(BaseForm infoMessage, ConnectionManager.Client srcClient) {
         MessageForm clientMessage = (MessageForm) infoMessage;
-        log.fine("Message from " + clientMessage.getSrc() + " to " + clientMessage.getDest() + ": " + clientMessage.getData() + ". From:" + Thread.currentThread().getName());
 
-        if (!clientMessage.getData().equals("stop"))
+        if (!clientMessage.getData().equals("stop") && !clientMessage.getData().equals("")) {
             ClientMessageRouter.getInstance().sendMessage(clientMessage);
-        else {
+            log.fine("Message from " + clientMessage.getSrc() + " to " + clientMessage.getDest() + ": " + clientMessage.getData() + ". From:" + Thread.currentThread().getName());
+        }
+
+        if (clientMessage.getData().equals("")) {
+            try {
+                srcClient.sendMessage(new MessageForm(MessageForm.MessageType.PRIVATE, "Empty messages will not be delivered", "User", "Server"));
+            } catch (IOException e) {
+                log.log(Level.WARNING, "Could not deliver response to client ", e.fillInStackTrace());
+            }
+        }
+
+        if (clientMessage.getData().equals("stop")) {
             try {
                 srcClient.disconnectClient();
             } catch (IOException e) {

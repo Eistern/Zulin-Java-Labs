@@ -2,7 +2,7 @@ package commObjects;
 
 public class CommandForm extends BaseForm {
     public enum CommandType {
-        GET_USER_LIST
+        GET_USER_LIST, GET_SERVER_TIME
     }
     final private CommandType commandType;
 
