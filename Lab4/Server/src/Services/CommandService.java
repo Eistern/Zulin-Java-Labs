@@ -19,11 +19,13 @@ public class CommandService implements ServiceInterface {
         try {
             switch (userCommand.getCommandType()) {
                 case GET_USER_LIST:
-                    srcClient.sendMessage(new MessageForm(MessageForm.MessageType.PRIVATE, ClientMessageRouter.getInstance().getNickNameList(), "User", "Server"));
+                    srcClient.sendMessage(new MessageForm(ClientMessageRouter.getInstance().getNickNameList()));
                     break;
                 case GET_SERVER_TIME:
                     Date currentTime = new Date();
-                    srcClient.sendMessage(new MessageForm(MessageForm.MessageType.PRIVATE, currentTime.toString(), "User", "Server"));
+                    srcClient.sendMessage(new MessageForm(currentTime.toString()));
+                case GET_HELP:
+                    srcClient.sendMessage(new MessageForm("->time to get current server time\n->list to get list of connected users"));
                 default:
                     log.log(Level.WARNING, "Unexpected command type");
             }

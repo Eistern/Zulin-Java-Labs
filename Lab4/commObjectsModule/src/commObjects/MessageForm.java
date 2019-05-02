@@ -26,6 +26,14 @@ public class MessageForm extends BaseForm {
         this.src = src;
     }
 
+    public MessageForm(String serverData) {
+        super("s_msg");
+        this.type = MessageType.PRIVATE;
+        this.dest = "User";
+        this.src = "Server";
+        this.data = serverData;
+    }
+
     public MessageType getType() {
         return type;
     }

@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class ConnectionManager {
-    static void connectClient(Socket clientPort) throws IOException, ClassNotFoundException {
+    static Client connectClient(Socket clientPort) throws IOException, ClassNotFoundException {
         Client currentClient = new Client(clientPort);
         String nickName = "Server";
         currentClient.sendMessage(new AuthorizationForm());
@@ -23,7 +23,7 @@ public class ConnectionManager {
             else
                 currentClient.sendMessage(new AuthorizationForm("", AuthorizationForm.Status.REJECT));
         }
-        serverRunner.addClient(currentClient);
+        return currentClient;
     }
 
     public static class Client {

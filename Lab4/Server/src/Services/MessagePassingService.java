@@ -15,17 +15,13 @@ public class MessagePassingService implements ServiceInterface {
     public void serve(BaseForm infoMessage, ConnectionManager.Client srcClient) {
         MessageForm clientMessage = (MessageForm) infoMessage;
 
-        if (!clientMessage.getData().equals("stop") && !clientMessage.getData().equals("")) {
-            ClientMessageRouter.getInstance().sendMessage(clientMessage);
-            log.fine("Message from " + clientMessage.getSrc() + " to " + clientMessage.getDest() + ": " + clientMessage.getData() + ". From:" + Thread.currentThread().getName());
-        }
-
         if (clientMessage.getData().equals("")) {
             try {
-                srcClient.sendMessage(new MessageForm(MessageForm.MessageType.PRIVATE, "Empty messages will not be delivered", "User", "Server"));
+                srcClient.sendMessage(new MessageForm("Empty messages will not be delivered"));
             } catch (IOException e) {
                 log.log(Level.WARNING, "Could not deliver response to client ", e.fillInStackTrace());
             }
+            return;
         }
 
         if (clientMessage.getData().equals("stop")) {
@@ -34,6 +30,10 @@ public class MessagePassingService implements ServiceInterface {
             } catch (IOException e) {
                 log.log(Level.WARNING, "Could not disconnect client:" + srcClient.toString());
             }
+            return;
         }
+
+        ClientMessageRouter.getInstance().sendMessage(clientMessage);
+        log.fine("Message from " + clientMessage.getSrc() + " to " + clientMessage.getDest() + ": " + clientMessage.getData() + ". From:" + Thread.currentThread().getName());
     }
 }

@@ -38,7 +38,7 @@ public class ClientMessageRouter {
         }
     }
 
-    public void addClient(String _newClientName, ConnectionManager.Client _newClient) {
+    public synchronized void addClient(String _newClientName, ConnectionManager.Client _newClient) {
         clientMap.put(_newClientName, _newClient);
     }
 

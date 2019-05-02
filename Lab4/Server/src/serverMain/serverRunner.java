@@ -1,7 +1,5 @@
 package serverMain;
 
-import Services.ClientMessageRouter;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,23 +15,12 @@ public class serverRunner {
             Socket newClient;
             try {
                 newClient = clientGetter.accept();
-                ConnectionManager.connectClient(newClient);
+                Thread handler = new Thread(new ClientManager(newClient));
+                handler.start();
 
-                if (Thread.activeCount() == 1)
-                    break;
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (IOException e) {
                 log.log(Level.SEVERE, "Could not connect client", e.fillInStackTrace());
             }
         }
-    }
-
-    static void addClient(ConnectionManager.Client newClient) {
-        if (!newClient.isFinalized()) {
-            log.log(Level.WARNING, "Did not get nickName from a client" + newClient);
-            return;
-        }
-        ClientMessageRouter.getInstance().addClient(newClient.getClientName(), newClient);
-        Thread handler = new Thread(new ClientManager(newClient));
-        handler.start();
     }
 }
